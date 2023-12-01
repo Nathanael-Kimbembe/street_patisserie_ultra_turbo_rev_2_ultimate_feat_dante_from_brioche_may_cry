@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "street_patisserie_ultra_turbo_rev_2_ultimate_feat_dante_from_brioche_may_cry", "street_patisserie_ultra_turbo_rev_2_ultimate_feat_dante_from_brioche_may_cry.csproj", "{944A27A0-0ECF-405C-994F-088E8A4CB88E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{944A27A0-0ECF-405C-994F-088E8A4CB88E}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

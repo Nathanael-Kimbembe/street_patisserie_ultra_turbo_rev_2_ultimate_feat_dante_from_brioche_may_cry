@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://cex5lu11urxj2"]
+[gd_scene load_steps=2 format=3 uid="uid://cex5lu11urxj2"]
+
+[ext_resource type="Script" path="res://script/fighter/fighter.cs" id="1_of4go"]
 
 [node name="fighter" type="Node2D"]
+script = ExtResource("1_of4go")
