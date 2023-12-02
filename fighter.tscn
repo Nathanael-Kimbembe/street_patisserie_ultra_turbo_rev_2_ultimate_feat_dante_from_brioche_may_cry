@@ -1,10 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://cex5lu11urxj2"]
+[gd_scene load_steps=5 format=3 uid="uid://cex5lu11urxj2"]
 
-[ext_resource type="Script" path="res://script/fighter/fighter.cs" id="1_of4go"]
-[ext_resource type="Script" path="res://script/fighter/action_buffer.cs" id="2_oyykm"]
+[ext_resource type="Script" path="res://script/fighter/fighter.gd" id="1_of4go"]
+[ext_resource type="Script" path="res://script/fighter/motion_inputs.gd" id="2_ffi17"]
+[ext_resource type="Texture2D" path="res://asset/fighter/mini-chocolatine.jpg" id="3_dq0pn"]
+[ext_resource type="Texture2D" path="res://asset/fighter/moule-chocolat-carre-ligne-41-cm-x15-chocolate-world.jpg" id="4_u60bd"]
 
 [node name="fighter" type="Node2D"]
 script = ExtResource("1_of4go")
 
 [node name="action_buffer" type="Node2D" parent="."]
-script = ExtResource("2_oyykm")
+script = ExtResource("2_ffi17")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(296.469, 311.344)
+scale = Vector2(0.445114, 0.462458)
+texture = ExtResource("3_dq0pn")
+
+[node name="Projectile" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Projectile"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Projectile/Area2D"]
+position = Vector2(518, 319)
+scale = Vector2(0.0952381, 0.0730159)
+texture = ExtResource("4_u60bd")
