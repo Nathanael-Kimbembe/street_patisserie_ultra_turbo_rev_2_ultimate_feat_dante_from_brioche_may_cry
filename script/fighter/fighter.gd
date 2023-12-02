@@ -14,6 +14,7 @@ var gravity = Vector2(0, 7000);
 var airborn = false;
 var dashing = false;
 var hasDashed = false;
+var groundDash = false;
 var jumpTime = 0;
 var dashTime = 0;
 # Called when the node enters the scene tree for the first time.
@@ -38,8 +39,6 @@ func _physics_process(delta):
 		for group in groups:
 			if (group == "ground"):
 				airborn = false;
-	#if (collisioner && collisioner.get_collider().get_groups() == "ground"):
-	#	airborn = false;
 
 func universal_air(currInput, delta):
 	jumpTime += delta;
@@ -72,9 +71,19 @@ func universal_ground(currInput):
 		velocity = Vector2(0, 0);
 	if (currInput == 6):
 		if (faceRight):
-			velocity = forwardVelocity;
+			if (input.motion_input(queue, [6, 5, 6]) || groundDash):
+				groundDash = true;
+				velocity = 2 * forwardVelocity;
+			else:
+				velocity = forwardVelocity;
 		else:
-			velocity = -forwardVelocity;
+			if (input.motion_input(queue, [4, 5, 4]) || groundDash):
+				groundDash = true;
+				velocity = 2 * -forwardVelocity;
+			else:
+				velocity = -forwardVelocity;
+	elif (groundDash):
+		groundDash = false;
 	if (currInput == 4):
 		if (faceRight):
 			velocity = -backwardsVelocity;
