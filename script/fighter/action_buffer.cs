@@ -1,9 +1,8 @@
 using Godot;
-using System.Collections.Generic;
+using System;
 
-public partial class fighter : Node2D
+public partial class action_buffer : Node2D
 {
-	public string character_name;
 	public int controler_index;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

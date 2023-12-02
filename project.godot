@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="street_patisserie_ultra_turbo_rev_2_ultimate_feat_dante_from_brioche_may_cry"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
