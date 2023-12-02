@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cex5lu11urxj2"]
+
+[ext_resource type="Script" path="res://script/fighter/fighter.cs" id="1_of4go"]
+[ext_resource type="Script" path="res://script/fighter/motion_inputs.gd" id="2_ffi17"]
+
+[node name="fighter" type="Node2D"]
+script = ExtResource("1_of4go")
+
+[node name="action_buffer" type="Node2D" parent="."]
+script = ExtResource("2_ffi17")

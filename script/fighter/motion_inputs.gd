@@ -12,7 +12,11 @@ func _ready():
 func _process(delta):
 	frame += 1;
 	var direction = Input.get_vector("left", "right", "up", "down");
+<<<<<<< Updated upstream
 	var directionString = convert_vector_to_direction(direction);
+=======
+	var directionNumber = convert_vector_to_direction(direction);
+>>>>>>> Stashed changes
 	if (queue):
 		var queueFront = queue.front();
 		queueFront[1] = frame;
@@ -21,16 +25,27 @@ func _process(delta):
 				queue.pop_back();
 		if (queue.size() > 30):
 			queue.pop_back()
+<<<<<<< Updated upstream
 	if (currInput != directionString):
 		currInput = directionString;
+=======
+	if (currInput != directionNumber):
+		currInput = directionNumber;
+>>>>>>> Stashed changes
 		var input = [currInput, frame];
 		frame = 0;
 		queue.push_front(input);
 	if (motion_input(queue, [2, 3, 6]) && Input.is_key_pressed(KEY_F)):
 		print("HADOUKEN");
+<<<<<<< Updated upstream
 
 func motion_input(inputList, moveInputs):
 	var motion = true;
+=======
+		queue.clear();
+
+func motion_input(inputList, moveInputs):
+>>>>>>> Stashed changes
 	var i = 0;
 	if (inputList.size() < moveInputs.size()):
 		return false;
