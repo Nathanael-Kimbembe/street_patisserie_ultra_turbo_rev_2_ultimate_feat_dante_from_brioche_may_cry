@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://dd1qpj18grqfm"]
 
 [node name="couque_au_chocolat" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
