@@ -16,7 +16,7 @@ func _ready():
 	player2Input.controllerId = 1;
 	player1.faceRight = true;
 	player2.faceRight = false;
-	player1.scale.x = -1;
+	player1.scale.x *= -1;
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,11 +24,13 @@ func _process(delta):
 	if (player1.position.x > player2.position.x && player1.faceRight):
 		player1.faceRight = false;
 		player2.faceRight = true;
-		player1.scale.x = -1;
-		player2.scale.x = 1;
+		player1.scale.x *= -1;
+		player2.scale.x *= -1;
 	elif (player1.position.x < player2.position.x && !player1.faceRight):
 		player1.faceRight = true;
 		player2.faceRight = false;
-		player1.scale.x = 1;
-		player2.scale.x = -1;
+		player1.scale.x *= -1;
+		player2.scale.x *= -1;
+
+	moyPosition.x = (player1.position.x + player2.position.x) / 2
 

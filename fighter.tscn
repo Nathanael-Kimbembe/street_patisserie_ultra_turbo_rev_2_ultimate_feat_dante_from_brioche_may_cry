@@ -8,6 +8,7 @@
 size = Vector2(292.5, 219.5)
 
 [node name="Fighter1" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_of4go")
 
 [node name="Input" type="Node2D" parent="."]
