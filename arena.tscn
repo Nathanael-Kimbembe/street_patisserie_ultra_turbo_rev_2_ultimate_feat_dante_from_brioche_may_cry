@@ -1,26 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctq8vrcx21msx"]
+[gd_scene load_steps=7 format=3 uid="uid://ctq8vrcx21msx"]
 
-[ext_resource type="Script" path="res://script/arena/arena.cs" id="1_7gh1o"]
+[ext_resource type="Script" path="res://script/arena/arena.gd" id="1_plyo7"]
+[ext_resource type="Texture2D" uid="uid://jmj7m6oolpsr" path="res://asset/character_select/boulangerie-patisserie-agencement-nakide-retail.jpg" id="2_ogjx3"]
+[ext_resource type="Script" path="res://script/arena/players.gd" id="3_4mgyc"]
+[ext_resource type="Script" path="res://script/arena/Camera.gd" id="4_2bw03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ag6ry"]
+size = Vector2(4255, 209.461)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfshc"]
+size = Vector2(87.5, 702)
 
 [node name="arena" type="Node2D"]
-script = ExtResource("1_7gh1o")
+script = ExtResource("1_plyo7")
 
 [node name="background" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.297)
+texture = ExtResource("2_ogjx3")
 
 [node name="ground" type="StaticBody2D" parent="background"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="background/ground"]
-
-[node name="left_wall" type="StaticBody2D" parent="background"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="background/left_wall"]
-
-[node name="right_wall" type="StaticBody2D" parent="background"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="background/right_wall"]
+position = Vector2(-8.34465e-06, 1174.73)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_ag6ry")
 
 [node name="players" type="Node2D" parent="."]
+script = ExtResource("3_4mgyc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("4_2bw03")
 
-[node name="UI" type="Node2D" parent="Camera2D"]
+[node name="UI" type="Node2D" parent="Camera"]
+
+[node name="right_wall" type="StaticBody2D" parent="Camera"]
+position = Vector2(576, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/right_wall"]
+position = Vector2(43.75, 0)
+shape = SubResource("RectangleShape2D_mfshc")
+
+[node name="left_wall" type="StaticBody2D" parent="Camera"]
+position = Vector2(-576, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/left_wall"]
+position = Vector2(-43.75, 0)
+shape = SubResource("RectangleShape2D_mfshc")
