@@ -12,3 +12,5 @@ texture = ExtResource("2_ogu1o")
 [node name="players" type="Node2D" parent="."]
 
 [node name="characters" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
