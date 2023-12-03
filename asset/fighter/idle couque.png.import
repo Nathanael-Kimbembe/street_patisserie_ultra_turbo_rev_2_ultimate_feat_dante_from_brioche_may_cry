@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1ll5kxb7jh57"
-path="res://.godot/imported/idle couque.png-1a4e70ef26f2680e983146477bd61b41.ctex"
+path="res://.godot/imported/idle couque.png-ea74e15f9cf3d037e824693a3584ef66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fighter/idle couque.png"
-dest_files=["res://.godot/imported/idle couque.png-1a4e70ef26f2680e983146477bd61b41.ctex"]
+source_file="res://asset/fighter/idle couque.png"
+dest_files=["res://.godot/imported/idle couque.png-ea74e15f9cf3d037e824693a3584ef66.ctex"]
 
 [params]
 
