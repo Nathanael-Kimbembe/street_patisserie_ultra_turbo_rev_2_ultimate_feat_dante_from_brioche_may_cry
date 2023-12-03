@@ -48,7 +48,7 @@ func second_announcement():
 	var tween = get_tree().create_tween()
 
 	var curpos = announcement_label.get_position()
-	announcement_label.set_position(Vector2(curpos.x * 1.1, curpos.y))
+	announcement_label.set_position(Vector2(curpos.x / 2, curpos.y))
 
 	tween.tween_property(announcement_label, "scale", target_scale, 0.6).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(announcement_label, "modulate", target_vanish, 0.3).set_delay(0.6).set_ease(Tween.EASE_IN_OUT)

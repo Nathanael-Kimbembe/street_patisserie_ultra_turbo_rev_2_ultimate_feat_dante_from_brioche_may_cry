@@ -1,16 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctq8vrcx21msx"]
+[gd_scene load_steps=11 format=3 uid="uid://ctq8vrcx21msx"]
 
 [ext_resource type="Script" path="res://script/arena/arena.gd" id="1_plyo7"]
 [ext_resource type="Texture2D" uid="uid://jmj7m6oolpsr" path="res://asset/character_select/boulangerie-patisserie-agencement-nakide-retail.jpg" id="2_ogjx3"]
 [ext_resource type="Script" path="res://script/arena/players.gd" id="3_4mgyc"]
 [ext_resource type="Script" path="res://script/arena/Camera.gd" id="4_2bw03"]
 [ext_resource type="PackedScene" uid="uid://cex5lu11urxj2" path="res://fighter.tscn" id="4_r51ix"]
+[ext_resource type="Script" path="res://script/arena/announcer.gd" id="6_qqkjj"]
+[ext_resource type="FontFile" uid="uid://d1yeupm6br0gq" path="res://asset/arena/CoffieBold.otf" id="7_hjfjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ag6ry"]
 size = Vector2(4255, 209.461)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfshc"]
 size = Vector2(87.5, 702)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t1ges"]
+line_spacing = 16.0
+font = ExtResource("7_hjfjd")
+font_size = 50
+font_color = Color(0.745098, 0.501961, 0.211765, 1)
 
 [node name="arena" type="Node2D"]
 script = ExtResource("1_plyo7")
@@ -53,3 +61,20 @@ position = Vector2(-576, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/left_wall"]
 position = Vector2(-43.75, 0)
 shape = SubResource("RectangleShape2D_mfshc")
+
+[node name="Announcer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_qqkjj")
+
+[node name="Label" type="Label" parent="Announcer"]
+layout_mode = 0
+offset_left = -211.0
+offset_top = -16.0
+offset_right = -158.0
+offset_bottom = 7.0
+label_settings = SubResource("LabelSettings_t1ges")
+
+[node name="Timer" type="Timer" parent="Announcer"]
