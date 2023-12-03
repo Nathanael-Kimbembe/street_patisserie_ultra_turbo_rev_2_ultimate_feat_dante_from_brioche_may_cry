@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum {IDLE, WALK, BACK_WALK, JUMP, BLOCK, LOW_BLOCK, DASH, AIRDASH = 0};
+enum {IDLE, WALK, CROUCH, CROUCH_BLOCK, HIT, BACK_WALK, JUMP, BLOCK, DASH, AIRDASH = 0};
 
 var queue;
 var input;
@@ -21,6 +21,7 @@ var groundDash = false;
 var jumpTime = 0;
 var dashTime = 0;
 var curState = IDLE;
+var attacking = false;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	input = get_node("./Input");
@@ -35,11 +36,17 @@ func _physics_process(delta):
 		currInput = queue.front()[0];
 	if (!faceRight):
 		currInput = reverse_input(currInput);
+
+	if (airborn == false && attacking == false):
+		do_crouch(currInput);
+		do_jump(currInput);
+		if (curState != DASH):
+			do_walk(currInput);
+		do_dash(currInput);
+		do_idle(currInput);
 	
-	if (curState == IDLE):
-		do_idle();
-	if (curState == WALK || curState == IDLE || curState == BACK_WALK):
-		do_walk(currInput)
+	if (airborn):
+		apply_gravity(delta);
 	
 	var speedVect = velocity * delta;
 	var collisioner = move_and_collide(speedVect, true);
@@ -50,13 +57,17 @@ func _physics_process(delta):
 			if (group == "ground"):
 				wasGround = true
 				airborn = false;
+				curState = IDLE;
 		if (wasGround):
 			velocity.x = 0;
-	animation_manager(currInput);
+	#animation_manager(currInput);
 	move_and_slide()
 
-func do_idle():
-	animation.play("Idle");
+func do_idle(currInput):
+	if (currInput == 5):
+		animation.play("Idle");
+		curState = IDLE;
+		velocity = Vector2(0,0);
 
 func do_walk(curInput):
 	if (curInput == 6):
@@ -69,10 +80,52 @@ func do_walk(curInput):
 	elif (curInput == 4):
 		animation.play("WalkBack");
 		if (faceRight):
-			velocity = backwardsVelocity;
-		else:
 			velocity = -backwardsVelocity;
+		else:
+			velocity = backwardsVelocity;
 		curState = BACK_WALK;
+
+func do_dash(currInput):
+	if ((currInput == 6 && curState == DASH) || (faceRight && input.motion_input(queue, [6, 5, 6])) || (!faceRight &&  input.motion_input(queue, [4, 5, 4]))):
+		animation.play("Dash");
+		curState = DASH;
+		if (faceRight):
+			velocity = 2 * forwardVelocity;
+		else:
+			velocity = -2 * forwardVelocity;
+	
+func do_crouch(currInput):
+	if (currInput == 2 || currInput == 3):
+		animation.play("Crouch");
+		curState = CROUCH;
+		velocity = Vector2(0, 0);
+	elif (currInput == 1):
+		animation.play("CrouchBlock");
+		curState = CROUCH_BLOCK;
+		velocity = Vector2(0, 0);
+
+func do_jump(currInput):
+	if (currInput == 8 || currInput == 7 || currInput == 9):
+		animation.play("Jump");
+		airborn = true;
+		velocity = jump;
+		if (currInput == 9):
+			if (faceRight):
+				velocity += forwardVelocity;
+			else:
+				velocity -= forwardVelocity;
+		if (currInput == 7):
+			if (faceRight):
+				velocity -= backwardsVelocity;
+			else:
+				velocity += backwardsVelocity;
+		curState = JUMP;
+		jumpTime = 0;
+
+func apply_gravity(delta):
+	jumpTime += delta;
+	if (!dashing && jumpTime > 0.2):
+		velocity += gravity * delta;
 
 func universal_air(currInput, delta):
 	jumpTime += delta;
@@ -143,18 +196,8 @@ func universal_ground(currInput):
 		jumpTime = 0;
 
 func animation_manager(currInput):
-	if (currInput == 5):
-		animation.play("Idle");
 	if (currInput == 6 && groundDash):
 		animation.play("Dash");
-	if (currInput == 6 && !groundDash):
-		animation.play("Walk");
-	if (currInput == 4):
-		animation.play("WalkBack");
-	if (currInput == 1):
-		animation.play("CrouchBlock");
-	if (currInput == 2 || currInput == 3):
-		animation.play("Crouch");
 	if (airborn):
 		animation.play("Airborne");
 	if (airborn && dashing):

@@ -203,7 +203,6 @@ script = ExtResource("5_spg8y")
 shape = SubResource("SegmentShape2D_38imp")
 
 [node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_108n3")
 animation = &"Dash"
 frame_progress = 0.893471
