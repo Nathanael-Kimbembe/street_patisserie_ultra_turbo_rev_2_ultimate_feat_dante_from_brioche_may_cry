@@ -13,6 +13,7 @@ config_version=5
 config/name="street_patisserie_ultra_turbo_rev_2_ultimate_feat_dante_from_brioche_may_cry"
 run/main_scene="res://arena.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [dotnet]

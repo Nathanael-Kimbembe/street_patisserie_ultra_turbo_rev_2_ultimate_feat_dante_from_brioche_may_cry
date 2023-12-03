@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://d1ll5kxb7jh57" path="res://asset/fighter/idle couque.png" id="3_unv5s"]
 [ext_resource type="Script" path="res://script/fighter/inputs.gd" id="5_spg8y"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_38imp"]
-a = Vector2(0, -52)
-b = Vector2(0, 52)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_308tc"]
+radius = 25.0
+height = 112.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iyyt3"]
 atlas = ExtResource("3_unv5s")
@@ -200,7 +200,8 @@ position = Vector2(-4, 1)
 script = ExtResource("5_spg8y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_38imp")
+position = Vector2(0, 52)
+shape = SubResource("CapsuleShape2D_308tc")
 
 [node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_108n3")

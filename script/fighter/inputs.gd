@@ -17,7 +17,7 @@ func _process(delta):
 	if (queue):
 		var queueFront = queue.front();
 		queueFront[1] = frame;
-		if (frame > 30):
+		if (frame > 20):
 			while (queue.size() > 1):
 				queue.pop_back();
 		if (queue.size() > 30):
@@ -39,6 +39,8 @@ func motion_input(inputList, moveInputs):
 		if (moveInputs[i] != inputList[n][0]):
 			return false;
 		i += 1;
+	while (queue.size() > 1):
+		queue.pop_back();
 	return true	
 	
 func convert_vector_to_direction(direction):
