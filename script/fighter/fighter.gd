@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 var queue;
 var input;
+var animation;
 var faceRight = true;
-var backwardsVelocity = Vector2(100, 0);
-var forwardVelocity = Vector2(200, 0);
+var backwardsVelocity = Vector2(200, 0);
+var forwardVelocity = Vector2(300, 0);
 var dash = Vector2(1000, 0);
 var backDash = Vector2(500, 0);
-var jump = Vector2(0, -1000);
-var forwardJump = Vector2(200, -1000);
-var backwardJump = Vector2(-100, -1000);
+var jump = Vector2(0, -1250);
+var forwardJump = Vector2(300, -1250);
+var backwardJump = Vector2(-200, -1250);
 var gravity = Vector2(0, 7000);
 var airborn = false;
 var dashing = false;
@@ -21,6 +22,8 @@ var dashTime = 0;
 func _ready():
 	input = get_node("./Input");
 	queue = input.queue;
+	animation = get_node("./AnimationPlayer");
+	animation.play("Idle");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -44,6 +47,7 @@ func _physics_process(delta):
 				airborn = false;
 		if (wasGround):
 			velocity.x = 0;
+	animation_manager(currInput);
 	move_and_slide()
 	
 
@@ -103,15 +107,35 @@ func universal_ground(currInput):
 			velocity = forwardJump;
 		else:
 			velocity = Vector2(-forwardJump.x, forwardJump.y);
-	if ((currInput == 7 && faceRight) || (currInput == 9 && !faceRight)):
+	if (currInput == 7):
 		if (faceRight):
 			velocity = backwardJump;
 		else:
 			velocity = Vector2(-backwardJump.x, backwardJump.y);
+	if (currInput == 1 || currInput == 2 || currInput == 3):
+		velocity = Vector2(0, 0);
 	if (currInput && currInput > 6):
 		hasDashed = false;
 		airborn = true;
 		jumpTime = 0;
+
+func animation_manager(currInput):
+	if (currInput == 5):
+		animation.play("Idle");
+	if (currInput == 6 && groundDash):
+		animation.play("Dash");
+	if (currInput == 6 && !groundDash):
+		animation.play("Walk");
+	if (currInput == 4):
+		animation.play("WalkBack");
+	if (currInput == 1):
+		animation.play("CrouchBlock");
+	if (currInput == 2 || currInput == 3):
+		animation.play("Crouch");
+	if (airborn):
+		animation.play("Airborne");
+	if (airborn && dashing):
+		animation.play("Dash");
 
 func reverse_input(input):
 	if (input == 6):

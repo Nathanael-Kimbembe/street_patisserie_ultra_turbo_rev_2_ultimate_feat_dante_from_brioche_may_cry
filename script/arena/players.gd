@@ -16,7 +16,7 @@ func _ready():
 	player2Input.controllerId = 1;
 	player1.faceRight = true;
 	player2.faceRight = false;
-	player1.scale.x *= -1;
+	player2.scale.x *= -1;
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
