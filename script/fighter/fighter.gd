@@ -9,7 +9,7 @@ var dash = Vector2(1000, 0);
 var backDash = Vector2(500, 0);
 var jump = Vector2(0, -1000);
 var forwardJump = Vector2(200, -1000);
-var BackwardJump = Vector2(-100, -1000);
+var backwardJump = Vector2(-100, -1000);
 var gravity = Vector2(0, 7000);
 var airborn = false;
 var dashing = false;
@@ -33,12 +33,19 @@ func _physics_process(delta):
 		universal_air(currInput, delta);
 	else:
 		universal_ground(currInput);
-	var collisioner = move_and_collide(velocity * delta);
+	var speedVect = velocity * delta;
+	var collisioner = move_and_collide(speedVect, true);
 	if (collisioner && airborn):
+		var wasGround = false;
 		var groups = collisioner.get_collider().get_groups();
 		for group in groups:
 			if (group == "ground"):
+				wasGround = true
 				airborn = false;
+		if (wasGround):
+			velocity.x = 0;
+	move_and_slide()
+	
 
 func universal_air(currInput, delta):
 	jumpTime += delta;
@@ -91,10 +98,16 @@ func universal_ground(currInput):
 			velocity = backwardsVelocity;
 	if (currInput == 8):
 		velocity = jump;
-	if ((currInput == 9 && faceRight) || (currInput == 7 && !faceRight)):
-		velocity = forwardJump;
+	if (currInput == 9):
+		if (faceRight):
+			velocity = forwardJump;
+		else:
+			velocity = Vector2(-forwardJump.x, forwardJump.y);
 	if ((currInput == 7 && faceRight) || (currInput == 9 && !faceRight)):
-		velocity = BackwardJump;
+		if (faceRight):
+			velocity = backwardJump;
+		else:
+			velocity = Vector2(-backwardJump.x, backwardJump.y);
 	if (currInput && currInput > 6):
 		hasDashed = false;
 		airborn = true;
