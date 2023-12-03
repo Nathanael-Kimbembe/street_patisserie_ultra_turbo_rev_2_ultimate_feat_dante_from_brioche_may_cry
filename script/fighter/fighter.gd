@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+enum {IDLE, WALK, BACK_WALK, JUMP, BLOCK, LOW_BLOCK, DASH, AIRDASH = 0};
+
 var queue;
 var input;
 var animation;
@@ -18,6 +20,7 @@ var hasDashed = false;
 var groundDash = false;
 var jumpTime = 0;
 var dashTime = 0;
+var curState = IDLE;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	input = get_node("./Input");
@@ -32,10 +35,12 @@ func _physics_process(delta):
 		currInput = queue.front()[0];
 	if (!faceRight):
 		currInput = reverse_input(currInput);
-	if (airborn):
-		universal_air(currInput, delta);
-	else:
-		universal_ground(currInput);
+	
+	if (curState == IDLE):
+		do_idle();
+	if (curState == WALK || curState == IDLE || curState == BACK_WALK):
+		do_walk(currInput)
+	
 	var speedVect = velocity * delta;
 	var collisioner = move_and_collide(speedVect, true);
 	if (collisioner && airborn):
@@ -49,7 +54,25 @@ func _physics_process(delta):
 			velocity.x = 0;
 	animation_manager(currInput);
 	move_and_slide()
-	
+
+func do_idle():
+	animation.play("Idle");
+
+func do_walk(curInput):
+	if (curInput == 6):
+		animation.play("Walk");
+		if (faceRight):
+			velocity = forwardVelocity;
+		else:
+			velocity = -forwardVelocity;
+		curState = WALK;
+	elif (curInput == 4):
+		animation.play("WalkBack");
+		if (faceRight):
+			velocity = backwardsVelocity;
+		else:
+			velocity = -backwardsVelocity;
+		curState = BACK_WALK;
 
 func universal_air(currInput, delta):
 	jumpTime += delta;

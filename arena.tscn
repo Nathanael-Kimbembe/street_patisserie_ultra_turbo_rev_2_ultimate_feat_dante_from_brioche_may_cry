@@ -38,10 +38,10 @@ shape = SubResource("RectangleShape2D_ag6ry")
 script = ExtResource("3_4mgyc")
 
 [node name="Fighter1" parent="players" instance=ExtResource("4_r51ix")]
-position = Vector2(-348, 113)
+position = Vector2(-348, 214)
 
 [node name="Fighter2" parent="players" instance=ExtResource("4_r51ix")]
-position = Vector2(347, 113)
+position = Vector2(348, 214)
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("4_2bw03")
